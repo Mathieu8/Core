@@ -1,10 +1,12 @@
 package measurements;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
 
 /**
  * A simple example of Measurements class, later it should be increased to a
@@ -20,7 +22,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @version 08/23/2018
  *
  */
-public class Measurements  implements BasicMeasurements {
+public class Measurements implements BasicMeasurements {
 	private static final long serialVersionUID = 1L;
 	private LocalDateTime BeginDateTime;
 	private long beginTime, endTime, duration;
@@ -34,7 +36,7 @@ public class Measurements  implements BasicMeasurements {
 	private String activity;
 	private int activityCounter;
 
-	private int productivity;
+	static List<SliderData> productivity = new ArrayList<>();
 	private int productivityCounter;
 
 	public Measurements(int UID, LocalDateTime dt) {
@@ -51,7 +53,7 @@ public class Measurements  implements BasicMeasurements {
 	@Override
 	public String toString() {
 		String temp = ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-		return (String) temp.subSequence(13, temp.length()-1);
+		return (String) temp.subSequence(13, temp.length() - 1);
 	}
 
 	@Override
@@ -83,8 +85,8 @@ public class Measurements  implements BasicMeasurements {
 		activityCounter++;
 	}
 
-	public void setProductivity(int productivity) {
-		this.productivity = productivity;
-		productivityCounter++;
+	public void addProductivity(SliderData productivity) {
+		this.productivity.add(productivity);
+		productivityCounter = this.productivity.size();
 	}
 }
